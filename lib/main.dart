@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:netra/core/theme/appTheme.dart';
-import 'package:netra/features/homeScreen/screens/homeScreen.dart';
+import 'package:netra/features/splashScreen/screens/spalshscreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(primarySwatch: AppTheme.primaryColor).copyWith(background: AppTheme.whiteColor),
         // Add more theme properties here
       ),
-      home: PredictionScreen(),
+      home: SplashScreen(),
     );
   }
 }
