@@ -1,7 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:netra/core/theme/appTheme.dart';
 import 'package:netra/features/homeScreen/screens/homeScreen.dart';
 
 void main() {
@@ -12,9 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Image Prediction App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: AppTheme.primaryColor).copyWith(background: AppTheme.whiteColor),
+        // Add more theme properties here
       ),
       home: PredictionScreen(),
     );
