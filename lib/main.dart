@@ -6,9 +6,10 @@ import 'package:netra/features/languageselect/widgets/localization_services.dart
 import 'package:netra/features/splashScreen/screens/spalshscreen.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   LocalizationService localizationService = LocalizationService();
-  await localizationService.init(); // Initialize the localization service
+  await localizationService.init();
   Get.put(localizationService);
   runApp(MyApp());
 }
@@ -18,8 +19,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       translations: LocalizationService(),
-      locale: LocalizationService.locale,
-      fallbackLocale: LocalizationService.fallBackLocale,
+      locale: Get.find<LocalizationService>().getCurrentLocale(),
+      fallbackLocale: Locale('en', 'US'), // Set your default fallback locale here
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: TextTheme(

@@ -5,8 +5,7 @@ import 'package:netra/features/languageselect/widgets/en_US.dart';
 import 'package:netra/features/languageselect/widgets/hi_IN.dart';
 
 class LocalizationService extends Translations {
-  static final locale = Locale('en', 'US');
-  static final fallBackLocale = Locale('en', 'US');
+  static final box = GetStorage();
 
   static final language = ['English', 'Hindi'];
   static final locales = [
@@ -14,10 +13,9 @@ class LocalizationService extends Translations {
     Locale('hi', 'IN'),
   ];
 
-  Map<String, Map<String, String>> get keys => {'en_US': enUS, 'hi_IN': hiIN};
-
   Future<void> init() async {
-    final box = GetStorage();
+    await GetStorage.init();
+    
     final savedLang = box.read('language');
     if (savedLang != null) {
       final locale = getLocaleFromLanguage(savedLang);
@@ -29,7 +27,6 @@ class LocalizationService extends Translations {
 
   void changeLocale(String lang) {
     final locale = getLocaleFromLanguage(lang);
-    final box = GetStorage();
     box.write('language', lang);
     Get.updateLocale(locale!);
   }
@@ -42,7 +39,6 @@ class LocalizationService extends Translations {
   }
 
   Locale getCurrentLocale() {
-    final box = GetStorage();
     Locale defaultLocale;
 
     if (box.read('language') != null) {
@@ -56,8 +52,9 @@ class LocalizationService extends Translations {
   }
 
   String getCurrentLang() {
-    final box = GetStorage();
-
     return box.read('language') != null ? box.read('language') : 'English';
   }
+
+  @override
+  Map<String, Map<String, String>> get keys => {'en_US': enUS, 'hi_IN': hiIN};
 }

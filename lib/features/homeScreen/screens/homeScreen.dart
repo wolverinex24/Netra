@@ -9,6 +9,7 @@ import 'package:netra/features/homeScreen/widgets/drawer_home.dart';
 import 'package:netra/features/homeScreen/widgets/timelinetile_widget.dart';
 import 'package:netra/features/languageselect/widgets/localization_services.dart';
 import 'package:netra/features/result_screen/screens/resultScreen.dart';
+import 'package:netra/models/model.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -40,7 +41,8 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         _image = File(pickedFile.path);
       });
-
+      
+      
       navigateToResultScreen();
     } else {
       print('No image selected.');
@@ -119,8 +121,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   children: [
                     CustomTimelineTile(),
-                    const SizedBox(
-                      height: 30,
+                    SizedBox(
+                      height: height*0.002,
                     ),
                     ElevatedButton(
                         onPressed: () {
@@ -151,6 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               });
                         },
                         style: ElevatedButton.styleFrom(
+                          elevation: 5,
                             backgroundColor: AppTheme.primaryColor,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30))),

@@ -20,7 +20,7 @@ class CustomTimelineTile extends StatelessWidget {
             Text(
               "selectAffectedCrop".tr,
               style: GoogleFonts.montserrat(
-                  fontSize: width * 0.045,
+                  fontSize: width * 0.043,
                   fontWeight: FontWeight.w500,
                   color: AppTheme.primaryColor),
             )
@@ -33,7 +33,7 @@ class CustomTimelineTile extends StatelessWidget {
             Text(
               "uploadCropPhoto".tr,
               style: GoogleFonts.montserrat(
-                  fontSize: width * 0.045,
+                  fontSize: width * 0.043,
                   fontWeight: FontWeight.w500,
                   color: AppTheme.primaryColor),
             )
@@ -46,7 +46,7 @@ class CustomTimelineTile extends StatelessWidget {
             Text(
               "getSolution".tr,
               style: GoogleFonts.montserrat(
-                  fontSize: width * 0.045,
+                  fontSize: width * 0.043,
                   fontWeight: FontWeight.w500,
                   color: AppTheme.primaryColor),
             )
