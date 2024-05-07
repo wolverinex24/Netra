@@ -34,10 +34,6 @@ We welcome contributions to Netra! If you're interested in improving the app or 
 ## License
 Distributed under the MIT License. See `LICENSE` for more information.
 
-## Contact
-Your Name - @your_twitter
-Project Link: https://github.com/your_username/netra
-
 ## Acknowledgments
 - Flutter
 - YOLOv8
