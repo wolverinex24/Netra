@@ -1,4 +1,4 @@
-# Netra: Tomato Leaf Disease Detection
+# Netra: Neural Evaluation for Tomato leaf disease Recognition and pesticides Assistance
 
 ## Introduction
 Netra is an innovative mobile application developed using Flutter that leverages a custom-trained YOLOv8 model to accurately identify diseases in tomato leaves. Designed to run locally on Android devices, Netra offers farmers and gardeners a quick and reliable way to diagnose plant health.
