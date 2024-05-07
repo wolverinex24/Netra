@@ -1,148 +1,37 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:netra/core/theme/appTheme.dart';
+import 'package:netra/features/languageselect/widgets/localization_services.dart';
+import 'package:netra/features/splashScreen/screens/spalshscreen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
+  LocalizationService localizationService = LocalizationService();
+  await localizationService.init();
+  Get.put(localizationService);
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Image Prediction App',
+    return GetMaterialApp(
+      translations: LocalizationService(),
+      locale: Get.find<LocalizationService>().getCurrentLocale(),
+      fallbackLocale: Locale('en', 'US'), // Set your default fallback locale here
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: PredictionScreen(),
-    );
-  }
-}
-
-class PredictionScreen extends StatefulWidget {
-  @override
-  _PredictionScreenState createState() => _PredictionScreenState();
-}
-
-class _PredictionScreenState extends State<PredictionScreen> {
-  File? _image;
-  final picker = ImagePicker();
-
-  Future getImageFromCamera() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
-
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
-
-  Future getImageFromGallery() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Image Prediction'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            _image == null
-                ? Text('No image selected.')
-                : Image.file(
-                    _image!,
-                    width: 300,
-                    height: 300,
-                  ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: getImageFromCamera,
-              child: Text('Take Picture'),
-            ),
-            ElevatedButton(
-              onPressed: getImageFromGallery,
-              child: Text('Choose from Gallery'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                if (_image != null) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ResultScreen(image: _image!),
-                    ),
-                  );
-                }
-              },
-              child: Text('Submit'),
-            ),
-          ],
+        textTheme: TextTheme(
+          bodyLarge: TextStyle(color: AppTheme.primaryColor),
         ),
+        colorScheme:
+            ColorScheme.fromSwatch(primarySwatch: AppTheme.primaryColor)
+                .copyWith(background: AppTheme.whiteColor),
+        // Add more theme properties here
       ),
-    );
-  }
-}
-
-class ResultScreen extends StatelessWidget {
-  final File image;
-
-  ResultScreen({required this.image});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Prediction Result'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.file(
-              image,
-              width: 300,
-              height: 300,
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Prediction Result Text', // You can replace this with actual prediction result
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 20),
-            TextFormField(
-              maxLines: 3,
-              decoration: InputDecoration(
-                hintText: 'Enter Description',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('Continue Inspection'),
-            ),
-          ],
-        ),
-      ),
+      home: const SplashScreen(),
     );
   }
 }
